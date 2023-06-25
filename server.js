@@ -1,15 +1,14 @@
 const next = require('next');
-
 const https = require('https');
-
+const dotenv = require('dotenv');
 const fs = require("fs");
 
+// configure environment variables
+dotenv.config();
 const hostname = 'localhost'
 const port = 443
 const dev = process.env.NODE_ENV !== 'production'
-
 const app = next({ dev, hostname, port });
-
 const sslLocation = process.env.SSL_LOCATION;
 
 const sslOptions = {
@@ -18,7 +17,7 @@ const sslOptions = {
   ca: fs.readFileSync(sslLocation + "chain.pem")
 };
 
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = https.createServer(sslOptions, (req, res) => {
