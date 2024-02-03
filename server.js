@@ -5,8 +5,8 @@ const fs = require("fs");
 
 // configure environment variables
 dotenv.config();
-const hostname = 'localhost'
-const port = 443
+const hostname = process.env.hostname || 'localhost';
+const port = process.env.port || 8081;
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, hostname, port });
 const sslLocation = process.env.SSL_LOCATION;
@@ -32,7 +32,6 @@ app.prepare().then(() => {
 
   server.listen(port, (err) => {
     if (err) throw err
-    console.log('> Ready on https://localhost:' + port);
+    console.log('> Ready on https://' + hostname + ':' + port);
   })
 });
-
