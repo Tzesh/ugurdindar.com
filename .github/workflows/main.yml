@@ -27,6 +27,6 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: Copy-Item -Force -Recurse -Verbose -Path 'C:\actions-runner\_work\ugurdindar.com\ugurdindar.com\*' -Destination 'C:\ugurdindar.com\'
-    - run: cd C:\ugurdindar.com\
+    - run: cd C:\ugurdindar.com\ 
     - run: npm install
     - run: npm run build
