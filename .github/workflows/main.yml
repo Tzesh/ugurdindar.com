@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: cp -rip /home/tzesh/actions-runner/_work/ugurdindar.com /home/tzesh
+    - run: cp -rip /home/tzesh/actions-runner/_work/ugurdindar.com/ugurdindar.com /home/tzesh
     - run: cd /home/tzesh/ugurdindar.com
     - run: npm install
     - run: npm run build
