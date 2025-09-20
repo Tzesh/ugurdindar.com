@@ -28,4 +28,4 @@ jobs:
           docker rm ugurdindar.com || true
 
       - name: Run new container
-        run: docker run -d --name ugurdindar.com -p $PORT:$PORT -e PORT=$PORT ugurdindar.com:latest
+        run: docker run -d --name ugurdindar.com -p $PORT:$PORT -e PORT=$PORT --restart unless-stopped ugurdindar.com:latest
