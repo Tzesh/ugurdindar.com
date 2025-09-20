@@ -2,14 +2,12 @@ import Image from 'next/image';
 import GitHubCalendar from 'react-github-calendar';
 import RepoCard from '../components/RepoCard';
 import styles from '../styles/GithubPage.module.css';
+import { username } from '../constants/constants';
 
 const GithubPage = ({ repos, user }) => {
   const theme = {
-    level0: '#161B22',
-    level1: '#0e4429',
-    level2: '#006d32',
-    level3: '#26a641',
-    level4: '#39d353',
+    dark: ['#161B22', '#0e4429', '#006d32', '#26a641', '#39d353'],
+    maxLevel: 4
   };
 
   return (
@@ -39,7 +37,7 @@ const GithubPage = ({ repos, user }) => {
       </div>
       <div className={styles.contributions}>
         <GitHubCalendar
-          username={process.env.NEXT_PUBLIC_GITHUB_USERNAME}
+          username={username}
           theme={theme}
           hideColorLegend
           hideMonthLabels
@@ -51,14 +49,18 @@ const GithubPage = ({ repos, user }) => {
 
 export async function getStaticProps() {
   const userRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}`
+    `https://api.github.com/users/${username}`
   );
   const user = await userRes.json();
 
   const repoRes = await fetch(
-    `https://api.github.com/users/${process.env.NEXT_PUBLIC_GITHUB_USERNAME}/repos?per_page=100`
+    `https://api.github.com/users/${username}/repos?per_page=100`
   );
   let repos = await repoRes.json();
+  if (!Array.isArray(repos)) {
+    repos = [];
+  }
+
   repos = repos
     .sort((a, b) => b.stargazers_count - a.stargazers_count)
     .slice(0, 5);

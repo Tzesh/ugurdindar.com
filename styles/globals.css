@@ -85,3 +85,15 @@
 .css-modules:hover {
   background: rgba(21, 114, 182, 0.25);
 }
+
+a {
+  color: var(--accent-color, #f9826c);
+  text-decoration: none !important;
+  transition: color 0.2s;
+}
+
+a:hover {
+  text-decoration: none !important;
+  color: var(--accent-color, #f9826c);
+  background: var(--bottombar-hover-bg, #4f4f52);
+}

@@ -1,5 +1,6 @@
 import ContactCode from '../components/ContactCode';
 import styles from '../styles/ContactPage.module.css';
+import { contacts } from '../constants/constants';
 
 const ContactPage = () => {
 
@@ -7,7 +8,7 @@ const ContactPage = () => {
     <div className={styles.container}>
       <div>
         <h3 className={styles.heading}>Social Platforms</h3>
-        <ContactCode />
+        <ContactCode contacts={contacts}/>
       </div>
     </div>
   );

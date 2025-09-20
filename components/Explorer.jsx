@@ -3,29 +3,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import ChevronRight from '../components/icons/ChevronRight';
 import styles from '../styles/Explorer.module.css';
-
-const explorerItems = [
-  {
-    name: 'home.jsx',
-    path: '/',
-    icon: 'react_icon.svg',
-  },
-  {
-    name: 'about.html',
-    path: '/about',
-    icon: 'html_icon.svg',
-  },
-  {
-    name: 'contact.css',
-    path: '/contact',
-    icon: 'css_icon.svg',
-  },
-  {
-    name: 'github.md',
-    path: '/github',
-    icon: 'markdown_icon.svg',
-  },
-];
+import { explorerItems } from '../constants/constants';
 
 const Explorer = () => {
   const [portfolioOpen, setPortfolioOpen] = useState(true);

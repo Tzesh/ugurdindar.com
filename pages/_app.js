@@ -3,6 +3,7 @@ import Layout from "../components/Layout";
 import Head from "../components/Head";
 import "../styles/globals.css";
 import "../styles/themes.css";
+import { website } from "../constants/constants";
 
 function MyApp({ Component, pageProps }) {
 
@@ -17,7 +18,7 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Layout>
-      <Head title={`Uğur Dindar | ${pageProps.title}`} />
+      <Head title={`${website} | ${pageProps.title}`} />
       <Component {...pageProps} />
     </Layout>
   );

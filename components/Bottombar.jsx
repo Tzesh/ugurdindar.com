@@ -5,13 +5,14 @@ import CheckIcon from './icons/CheckIcon';
 import NextjsIcon from './icons/NextjsIcon';
 import SourceControlIcon from './icons/SourceControlIcon';
 import styles from '../styles/Bottombar.module.css';
+import { bottombarLink } from '../constants/constants';
 
 const Bottombar = () => {
   return (
     <footer className={styles.bottomBar}>
       <div className={styles.container}>
         <a
-          href="https://github.com/tzesh/vscode-portfolio"
+          href={bottombarLink}
           target="_blank"
           rel="noreferrer noopener"
           className={styles.section}

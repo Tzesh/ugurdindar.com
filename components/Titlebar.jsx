@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import styles from '../styles/Titlebar.module.css';
+import {developer} from '../constants/constants';
 
 const Titlebar = () => {
   return (
@@ -20,7 +21,7 @@ const Titlebar = () => {
         <p>Terminal</p>
         <p>Help</p>
       </div>
-      <p className={styles.title}>Uğur Dindar - Visual Studio Code</p>
+      <p className={styles.title}>{developer} - Visual Studio Code</p>
       <div className={styles.windowButtons}>
         <span className={styles.minimize}></span>
         <span className={styles.maximize}></span>
