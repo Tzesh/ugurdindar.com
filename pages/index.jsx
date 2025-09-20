@@ -8,12 +8,12 @@ export default function HomePage() {
       <div className={styles.container}>
         <div className={styles.background}>
           <h1>A.K.A</h1>
-          <h1>TZESH</h1>
+          <h1>LOBEAR</h1>
         </div>
         <div className={styles.foreground}>
           <div className={styles.content}>
-            <h1 className={styles.name}>Uğur Dindar</h1>
-            <h6 className={styles.bio}>Software Engineer</h6>
+            <h1 className={styles.name}>Onur Dindar</h1>
+            <h6 className={styles.bio}>Computer Engineering Student</h6>
             <Link href="/about">
               <button className={styles.button}>About</button>
             </Link>

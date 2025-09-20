@@ -3,13 +3,8 @@ import styles from '../styles/AboutPage.module.css';
 const contactItems = [
   {
     tag: 'h1',
-    title: 'Who am I?',
-    content: 'An ordinary person who interested in Computer Science & Technologies since childhood and also a graduate from Eskişehir Technical University. I have been known as Tzesh which is my nickname. I am striving to improve my knowledge by developing, staying up-to-date, and learning new things day by day.',
-  },
-  {
-    tag: 'h2',
-    title: 'My Resume',
-    content: 'If you want to seek more information about me, you can check my resume.',
+    title: 'About?',
+    content: 'A computer engineering student at Izmir Institute of Technology who is interested in computers since childhood. I am striving to improve myself in the field of software development.'
   }
 ];
 
@@ -26,11 +21,6 @@ const AboutPage = () => {
           </p>
         </div>
       ))}
-      <div>
-        <a className={styles.line} href='/resume.pdf' target='_blank' rel='noopener'>
-          &lt;a href="/resume.pdf" target="_blank" rel="noopener"&gt;Click here to see my resume&lt;/a&gt;
-        </a>
-      </div>
     </div>
   );
 };
