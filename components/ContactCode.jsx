@@ -3,23 +3,23 @@ import styles from '../styles/ContactCode.module.css';
 const contactItems = [
   {
     social: 'website',
-    link: 'ugurdindar.com',
-    href: 'https://ugurdindar.com',
+    link: 'onurdindar.com',
+    href: 'https://onurdindar.com',
   },
   {
     social: 'email',
-    link: 'mail@ugurdindar.com',
-    href: 'mailto:mail@ugurdindar.com',
+    link: 'mail@onurdindar.com',
+    href: 'mailto:mail@onurdindar.com',
   },
   {
     social: 'github',
-    link: 'tzesh',
-    href: 'https://github.com/tzesh',
+    link: 'lobeario',
+    href: 'https://github.com/lobeario',
   },
   {
     social: 'linkedin',
-    link: 'ugurdindar',
-    href: 'https://www.linkedin.com/in/ugurdindar/',
+    link: '0nurdindar',
+    href: 'https://www.linkedin.com/in/0nurdindar/',
   }
 ];
 
