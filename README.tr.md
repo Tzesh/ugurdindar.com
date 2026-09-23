@@ -49,6 +49,10 @@ npm run test:e2e
 - `components/Content.tsx` bölümleri gösterir. `app/globals.css` ve `components/Terminal.module.css` temaları ve duyarlı düzeni tanımlar.
 - `components/GithubPanel.tsx`, `lib/github.ts` ve `app/api/github/route.ts` herkese açık GitHub görünümünü sağlar. Sabit hesap Tzesh’dir; repo ve yıldız toplamları fork’ları içerir, ilk üç sıralaması ise fork’ları dışarıda bırakır.
 
+## Keşfedilebilirlik ve paylaşım
+
+Sitede favicon, [robots.txt](https://ugurdindar.com/robots.txt) ve doğrulanmış portföy kaynaklarına bağlantı veren Markdown biçiminde [llms.txt](https://ugurdindar.com/llms.txt) bulunur. Sonuncusu isteğe bağlı bir keşif önerisini izler; arama sıralaması veya yapay zekâ sistemlerine dahil olma garantisi vermez. Dile özel sosyal önizleme kartları `/en/opengraph-image`, `/tr/opengraph-image` ve `/de/opengraph-image` adreslerindedir.
+
 ## Yayınlama
 
 Üretim hedefi [ugurdindar.com](https://ugurdindar.com). Yayınlama düzeni, konteyner içinde `0.0.0.0:3000` adresini dinleyen çok aşamalı bir standalone Docker imajı kullanır. GitHub üzerinde çalışan CI, pull request’leri ve ana dalı denetler; self-hosted runner, ana dala gönderimlerde veya elle başlatıldığında yayınlar. Sunucu portu `PORT` secret’ından alınır; yayınlama sağlık kontrolü ve hata durumunda geri alma içerir.

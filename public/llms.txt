@@ -1,0 +1,26 @@
+# Uğur Dindar / PortfoCLI
+
+> Uğur Dindar is a software engineer working across event-driven distributed systems, secure payments, and software for manufacturing operations. PortfoCLI is his multilingual portfolio.
+
+The portfolio is available in English, Turkish, and German. Its experience, projects, and credentials are summarized from the English résumé PDF; the site’s profile and biography provide the corresponding online context.
+
+## Résumé and portfolio
+
+- [English résumé (PDF)](https://ugurdindar.com/resume.pdf): Full source résumé.
+- [English portfolio](https://ugurdindar.com/en): English entry point.
+- [Türkçe portföy](https://ugurdindar.com/tr): Turkish entry point.
+- [Deutschsprachiges Portfolio](https://ugurdindar.com/de): German entry point.
+- [About](https://ugurdindar.com/en?section=about): Profile and education.
+- [Experience](https://ugurdindar.com/en?section=experience): Work history.
+- [Skills and certificates](https://ugurdindar.com/en?section=skills): Technical skills and linked credentials.
+- [Projects](https://ugurdindar.com/en?section=projects): Résumé projects and their context.
+- [GitHub view](https://ugurdindar.com/en?section=github): Public repositories and contribution activity.
+- [Statistics](https://ugurdindar.com/en?section=stats): Figures drawn from the résumé.
+- [Résumé section](https://ugurdindar.com/en?section=resume): Online summary and PDF download.
+
+## Official profiles and contact
+
+- [GitHub — Tzesh](https://github.com/Tzesh): Public code profile.
+- [LinkedIn — Uğur Dindar](https://linkedin.com/in/ugurdindar/): Professional profile.
+- [Contact](https://ugurdindar.com/en?section=contact): Website contact details.
+- [Email](mailto:mail@ugurdindar.com): Direct contact address.

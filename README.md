@@ -49,6 +49,10 @@ npm run test:e2e
 - `components/Content.tsx` renders sections. `app/globals.css` and `components/Terminal.module.css` define themes and responsive layout.
 - `components/GithubPanel.tsx`, `lib/github.ts`, and `app/api/github/route.ts` power the public GitHub view. Its fixed account is Tzesh; repository and star totals include forks, while the top-three ranking excludes them.
 
+## Discovery and sharing
+
+The site provides a favicon, [robots.txt](https://ugurdindar.com/robots.txt), and a Markdown [llms.txt](https://ugurdindar.com/llms.txt) that points to verified portfolio sources. The latter follows an optional discovery proposal; it does not guarantee search ranking or AI inclusion. Localized social preview cards are available at `/en/opengraph-image`, `/tr/opengraph-image`, and `/de/opengraph-image`.
+
 ## Deployment
 
 The production target is [ugurdindar.com](https://ugurdindar.com). The deployment setup uses a standalone, multi-stage Docker image listening on `0.0.0.0:3000` inside the container. GitHub-hosted CI checks pull requests and the main branch; a self-hosted runner deploys main pushes or manual runs. The host port comes from the `PORT` secret, and deployment includes a health check and rollback on failure.
