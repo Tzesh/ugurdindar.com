@@ -1,0 +1,86 @@
+:root {
+  color-scheme: light;
+  --background: #eef1ed; --surface: #fcfdfb; --raised: #f1f5f0;
+  --text: #202c28; --muted: #596b62; --border: #d7e1d8;
+  --accent: #086950; --accent-soft: #e2f1e8; --accent-secondary: #2e7890;
+  --sidebar: #f5f8f3; --on-accent: #ffffff; --accent-border: #acd4bf;
+  --glow: #56bca41b; --glow-secondary: #569db412; --grid: #507a6510;
+  --panel-radius: 16px; --card-radius: 12px; --scene-shadow: 0 28px 100px #173b2210;
+  --mono: 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --display: 'Avenir Next', 'Segoe UI', sans-serif;
+}
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --background: #0d1415; --surface: #151e20; --raised: #1c292b;
+  --text: #edf5f0; --muted: #a1b8ae; --border: #2f4340;
+  --accent: #79ecc5; --accent-soft: #203c33; --accent-secondary: #86cfe2;
+  --sidebar: #111b1c; --on-accent: #10271e; --accent-border: #42705b;
+  --glow: #3cbeab14; --glow-secondary: #49769c14; --grid: #75b39a0a;
+  --scene-shadow: 0 28px 100px #00000045;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]), :root[data-theme='system'] {
+    color-scheme: dark;
+    --background: #0d1415; --surface: #151e20; --raised: #1c292b;
+    --text: #edf5f0; --muted: #a1b8ae; --border: #2f4340;
+    --accent: #79ecc5; --accent-soft: #203c33; --accent-secondary: #86cfe2;
+    --sidebar: #111b1c; --on-accent: #10271e; --accent-border: #42705b;
+    --glow: #3cbeab14; --glow-secondary: #49769c14; --grid: #75b39a0a;
+    --scene-shadow: 0 28px 100px #00000045;
+  }
+}
+/* Presets share component tokens; add a palette here and its name to commands/i18n. */
+:root[data-theme='aurora'] {
+  color-scheme: dark;
+  --background: #0d0b19; --surface: #171527; --raised: #211e36;
+  --text: #f1edff; --muted: #b0aacb; --border: #38314f;
+  --accent: #bda2ff; --accent-soft: #302545; --accent-secondary: #7ee8d4;
+  --sidebar: #121120; --on-accent: #1e1235; --accent-border: #6b518f;
+  --glow: #a374fb24; --glow-secondary: #2ee9c019; --grid: #c2a9ff09;
+  --panel-radius: 20px; --card-radius: 16px; --scene-shadow: 0 28px 110px #6235b922;
+}
+:root[data-theme='ember'] {
+  color-scheme: dark;
+  --background: #18110f; --surface: #231b17; --raised: #30251e;
+  --text: #fff3e6; --muted: #c7b4a3; --border: #493b30;
+  --accent: #ffba7a; --accent-soft: #402c1d; --accent-secondary: #ef937f;
+  --sidebar: #1d1612; --on-accent: #321c0d; --accent-border: #83572f;
+  --glow: #d77b3821; --glow-secondary: #d3544816; --grid: #e2ae7610;
+  --panel-radius: 12px; --card-radius: 10px; --scene-shadow: 0 28px 110px #ae521c18;
+}
+:root[data-theme='blueprint'] {
+  color-scheme: light;
+  --background: #e8eff9; --surface: #f8fbff; --raised: #edf3fc;
+  --text: #18345a; --muted: #486482; --border: #c6d7ed;
+  --accent: #215cbd; --accent-soft: #dfebfc; --accent-secondary: #087783;
+  --sidebar: #eef4fc; --on-accent: #ffffff; --accent-border: #94b5e4;
+  --glow: #629cf922; --glow-secondary: #42a2bc0d; --grid: #215cbd13;
+  --panel-radius: 6px; --card-radius: 5px; --scene-shadow: 0 20px 70px #174a8f14;
+  --display: var(--mono);
+}
+:root[data-theme='matrix'] {
+  color-scheme: dark;
+  --background: #030a05; --surface: #07130b; --raised: #0c1f11;
+  --text: #d3ffdc; --muted: #8dc09a; --border: #23462d;
+  --accent: #6cff8d; --accent-soft: #12371e; --accent-secondary: #91f6b9;
+  --sidebar: #051008; --on-accent: #031408; --accent-border: #3a8150;
+  --glow: #33ff7724; --glow-secondary: #04d35012; --grid: #55ff8810;
+  --panel-radius: 8px; --card-radius: 6px; --scene-shadow: 0 20px 100px #00ff4410;
+  --display: var(--mono);
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background-color: var(--background); color: var(--text);
+  background-image: radial-gradient(ellipse at 10% 0%, var(--glow), transparent 55%), radial-gradient(ellipse at 100% 35%, var(--glow-secondary), transparent 50%), linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: auto, auto, 64px 64px, 64px 64px; background-attachment: fixed;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; font-size: 1rem; line-height: 1.6;
+}
+a { color: inherit; text-underline-offset: .25em; }
+button, input, select { font: inherit; color: inherit; }
+button, select { cursor: pointer; }
+button:disabled, select:disabled { cursor: default; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+::selection { background: var(--accent); color: var(--on-accent); }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}

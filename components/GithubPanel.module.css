@@ -1,0 +1,60 @@
+.panel { margin: 32px 0; border: 1px solid var(--border); border-radius: var(--card-radius); background: var(--surface); overflow: hidden; }
+.header { display: flex; justify-content: space-between; align-items: end; gap: 16px; padding: 24px; background: linear-gradient(135deg, var(--raised), var(--surface)); border-bottom: 1px solid var(--border); }
+.eyebrow { color: var(--accent); font: .6875rem var(--mono); letter-spacing: .1em; }
+.panel .header h3 { margin: 7px 0 0; font: 600 1.5rem/1.25 var(--display); }
+.header a, .activityHeading a { color: var(--accent); font: .75rem var(--mono); text-decoration: none; }
+.header a:hover, .activityHeading a:hover { text-decoration: underline; }
+.panel > p, .error { margin: 24px; }
+.error button { min-height: 44px; padding: 8px 16px; color: var(--on-accent); background: var(--accent); border: 0; border-radius: 5px; }
+.metrics { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 0; border-bottom: 1px solid var(--border); }
+.metrics > div { padding: 22px 24px; }
+.metrics > div + div { border-left: 1px solid var(--border); }
+.metrics dt { color: var(--muted); font-size: .8125rem; }
+.metrics dd { margin: 4px 0 0; color: var(--accent); font: 600 2rem/1.2 var(--display); }
+.panel .updateNote { margin: 10px 24px 0; color: var(--muted); font: .6875rem var(--mono); }
+.sectionTitle { padding: 23px 24px 10px; }
+.sectionTitle h4, .activityHeading h4 { margin: 0; font: 600 1rem/1.35 var(--display); }
+.panel .sectionTitle p { margin: 5px 0 0; color: var(--muted); font-size: .75rem; }
+.topRepos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding: 0 24px 24px; }
+.repoCard { min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: 7px; background: var(--raised); overflow-wrap: anywhere; }
+.repoMeta { display: flex; justify-content: space-between; gap: 8px; color: var(--muted); font: .6875rem var(--mono); }
+.repoCard h4 { margin: 14px 0 8px; font: 600 1rem/1.3 var(--display); }
+.repoCard h4 a { color: var(--text); text-decoration: none; }
+.repoCard h4 a:hover { color: var(--accent); text-decoration: underline; }
+.panel .repoCard p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 4; overflow: hidden; margin: 0; color: var(--muted); font-size: .75rem; line-height: 1.55; }
+.allRepos { border-top: 1px solid var(--border); }
+.allRepos > summary { min-height: 48px; padding: 13px 24px; cursor: pointer; color: var(--accent); font: .8125rem var(--mono); }
+.allRepos > summary span { margin-left: 8px; color: var(--muted); }
+.allRepos ul { padding: 0 24px 16px; margin: 0; list-style: none; }
+.allRepos li { display: flex; align-items: center; gap: 10px; min-height: 44px; border-top: 1px solid var(--border); font-size: .8125rem; overflow-wrap: anywhere; }
+.allRepos li a { color: var(--text); flex: 1; min-width: 0; padding: 10px 0; }
+.allRepos li small { color: var(--muted); font: .6875rem var(--mono); }
+.allRepos li > span { margin-left: auto; color: var(--muted); white-space: nowrap; font: .75rem var(--mono); }
+.activity { border-top: 1px solid var(--border); padding: 22px 24px 24px; }
+.activityHeading { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px; }
+.panel .activity > p { color: var(--muted); font-size: .8125rem; }
+.activity .activitySummary { margin: 12px 0 0; font-size: .75rem; }
+.calendarViewport { overflow-x: auto; padding: 12px 3px 5px; }
+.calendarViewport:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+.calendar { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 10px); grid-auto-columns: 10px; gap: 3px; width: max-content; }
+.calendar > span, .legend i { border-radius: 2px; }
+.calendar > span[data-level='0'], .legend i[data-level='0'] { background: var(--raised); border: 1px solid var(--border); }
+.calendar > span[data-level='1'], .legend i[data-level='1'] { background: color-mix(in srgb, var(--accent) 25%, var(--raised)); }
+.calendar > span[data-level='2'], .legend i[data-level='2'] { background: color-mix(in srgb, var(--accent) 50%, var(--raised)); }
+.calendar > span[data-level='3'], .legend i[data-level='3'] { background: color-mix(in srgb, var(--accent) 75%, var(--raised)); }
+.calendar > span[data-level='4'], .legend i[data-level='4'] { background: var(--accent); }
+.legend { display: flex; align-items: center; justify-content: flex-end; gap: 4px; margin-top: 8px; color: var(--muted); font: .6875rem var(--mono); }
+.legend span:first-child { margin-right: 4px; }
+.legend span:last-child { margin-left: 4px; }
+.legend i { display: block; width: 10px; height: 10px; }
+@media (max-width: 1000px) { .topRepos { grid-template-columns: 1fr; } }
+@media (max-width: 420px) {
+  .header, .metrics > div, .sectionTitle, .activity { padding-left: 16px; padding-right: 16px; }
+  .header { align-items: start; }
+  .panel .header h3 { font-size: 1.25rem; }
+  .metrics dd { font-size: 1.5rem; }
+  .panel .updateNote { margin-left: 16px; margin-right: 16px; }
+  .topRepos { padding-left: 16px; padding-right: 16px; }
+  .allRepos > summary { padding-left: 16px; padding-right: 16px; }
+  .allRepos ul { padding-left: 16px; padding-right: 16px; }
+}
