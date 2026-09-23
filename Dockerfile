@@ -1,31 +1,18 @@
-# Use official Node.js image as the base
-FROM node:22-alpine
-
-# Set working directory
+FROM node:22-alpine AS build
 WORKDIR /app
-
-# Copy package.json and package-lock.json
+ENV NEXT_TELEMETRY_DISABLED=1
 COPY package*.json ./
-
-# Set environment to production for best performance
-ENV NODE_ENV=production
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy rest of the app
+RUN npm ci
 COPY . .
-
-# Build Next.js app
 RUN npm run build
 
-# Use non-root user for security
+FROM node:22-alpine AS runtime
+WORKDIR /app
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 HOSTNAME=0.0.0.0 PORT=3000
+COPY --from=build --chown=node:node /app/.next/standalone ./
+COPY --from=build --chown=node:node /app/.next/static ./.next/static
+COPY --from=build --chown=node:node /app/public ./public
 USER node
-
-# Expose port from environment variable, default to 3000
-ARG PORT=3000
-ENV PORT=$PORT
-EXPOSE $PORT
-
-# Start Next.js app
-CMD ["npm", "start"]
+EXPOSE 3000
+HEALTHCHECK --interval=5s --timeout=5s --start-period=10s --retries=5 CMD node -e "fetch('http://127.0.0.1:3000/en', {signal: AbortSignal.timeout(4000)}).then(r => process.exit(r.ok ? 0 : 1)).catch(() => process.exit(1))"
+CMD ["node", "server.js"]

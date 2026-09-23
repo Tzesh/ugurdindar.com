@@ -1,31 +1,51 @@
-# Node.js CI/CD with local Docker deployment
-name: Local Docker CI/CD
+name: Validate and deploy portfolio
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
-  build-and-deploy:
-    runs-on: self-hosted
-    env:
-      PORT: ${{ secrets.PORT }}
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - run: npx playwright install --with-deps chromium webkit
+      - run: npm run test:e2e -- --workers=2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build Docker image locally
-        run: docker build -t ugurdindar.com:latest .
-
-      - name: Stop and remove old container
-        run: |
-          docker stop ugurdindar.com || true
-          docker rm ugurdindar.com || true
-
-      - name: Run new container
-        run: docker run -d --name ugurdindar.com -p $PORT:$PORT -e PORT=$PORT --restart unless-stopped ugurdindar.com:latest
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: validate
+    runs-on: [self-hosted, Linux, X64]
+    timeout-minutes: 20
+    concurrency:
+      group: ugurdindar-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - name: Build production image
+        env:
+          DEPLOY_IMAGE: ugurdindar.com:${{ github.sha }}
+        run: docker build --pull -t "$DEPLOY_IMAGE" .
+      - name: Check and replace production container
+        env:
+          PORT: ${{ secrets.PORT }}
+          DEPLOY_IMAGE: ugurdindar.com:${{ github.sha }}
+        run: bash .github/scripts/deploy.sh

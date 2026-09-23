@@ -1,7 +1,12 @@
 node_modules
-npm-debug.log
-Dockerfile
-.dockerignore
-.git
-.gitignore
 .next
+.git
+.github
+.developer-toolpack
+test-results
+playwright-report
+*.tsbuildinfo
+.env*
+.DS_Store
+npm-debug.log
+HANDOFF.md
