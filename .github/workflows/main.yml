@@ -6,6 +6,13 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      mode:
+        description: Verify images without changing production, or deploy
+        type: choice
+        options: [probe, deploy]
+        default: deploy
+        required: true
 
 permissions:
   contents: read
@@ -28,24 +35,67 @@ jobs:
       - run: npx playwright install --with-deps chromium webkit
       - run: npm run test:e2e -- --workers=2
 
-  deploy:
+  publish:
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
     needs: validate
-    runs-on: [self-hosted, Linux, X64]
-    timeout-minutes: 20
-    concurrency:
-      group: ugurdindar-production
-      cancel-in-progress: false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    permissions:
+      contents: read
+      packages: write
+    outputs:
+      web_image: ${{ steps.publish.outputs.web_image }}
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
         with:
           persist-credentials: false
-      - name: Build production image
+      - name: Build and publish immutable images
+        id: publish
         env:
-          DEPLOY_IMAGE: ugurdindar.com:${{ github.sha }}
-        run: docker build --pull -t "$DEPLOY_IMAGE" .
-      - name: Check and replace production container
+          REGISTRY_IMAGE: ghcr.io/tzesh/ugurdindar.com
+          SOURCE_URL: ${{ github.server_url }}/${{ github.repository }}
+          REGISTRY_TOKEN: ${{ github.token }}
+          NEXT_PUBLIC_DISCORD_INVITE: ${{ vars.NEXT_PUBLIC_DISCORD_INVITE || 'https://discord.gg/Y6gT5PrN4f' }}
+        run: |
+          set -euo pipefail
+          printf '%s' "$REGISTRY_TOKEN" | docker login ghcr.io --username "$GITHUB_ACTOR" --password-stdin
+          trap 'docker logout ghcr.io >/dev/null 2>&1 || true' EXIT
+          image="$REGISTRY_IMAGE:$GITHUB_SHA"
+          docker build --pull --platform linux/amd64 \
+            --label "org.opencontainers.image.source=$SOURCE_URL" \
+            --label "org.opencontainers.image.revision=$GITHUB_SHA" \
+            --tag "$image" .
+          docker push "$image"
+          digest=$(docker buildx imagetools inspect "$image" --format '{{json .Manifest.Digest}}' | jq -er .)
+          [[ "$digest" =~ ^sha256:[0-9a-f]{64}$ ]]
+          printf 'web_image=%s@%s\n' "$REGISTRY_IMAGE" "$digest" >> "$GITHUB_OUTPUT"
+
+  deploy:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (vars.REMOTE_DEPLOY_ENABLED == 'true' ||
+       (github.event_name == 'workflow_dispatch' && inputs.mode == 'probe'))
+    needs: publish
+    runs-on: ubuntu-24.04
+    environment: production
+    timeout-minutes: 45
+    permissions:
+      contents: read
+      packages: read
+    concurrency:
+      group: ugur-production
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - name: Send a restricted release request
         env:
-          PORT: ${{ secrets.PORT }}
-          DEPLOY_IMAGE: ugurdindar.com:${{ github.sha }}
-        run: bash .github/scripts/deploy.sh
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+          DEPLOY_PORT: ${{ vars.DEPLOY_PORT }}
+          DEPLOY_KNOWN_HOSTS: ${{ vars.DEPLOY_KNOWN_HOSTS }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          REGISTRY_TOKEN: ${{ github.token }}
+          DEPLOY_MODE: ${{ github.event_name == 'workflow_dispatch' && inputs.mode || 'deploy' }}
+          WEB_IMAGE: ${{ needs.publish.outputs.web_image }}
+        run: python3 .github/scripts/remote-deploy.py
