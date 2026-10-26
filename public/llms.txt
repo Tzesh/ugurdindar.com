@@ -6,7 +6,7 @@ The portfolio is available in English, Turkish, and German. Its profile, experie
 
 ## Résumé and portfolio
 
-- [English résumé (PDF)](https://ugurdindar.com/resume.pdf): Downloadable résumé; the online experience also includes subsequent professional updates.
+- [English résumé (PDF)](https://ugurdindar.com/resume.pdf): Updated English résumé, including payment engineering, division-level initiatives, and AI development tooling.
 - [English portfolio](https://ugurdindar.com/en): English entry point.
 - [Türkçe portföy](https://ugurdindar.com/tr): Turkish entry point.
 - [Deutschsprachiges Portfolio](https://ugurdindar.com/de): German entry point.
