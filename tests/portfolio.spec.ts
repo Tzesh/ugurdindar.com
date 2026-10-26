@@ -8,6 +8,8 @@ test('professional updates appear in every locale with separate AI toolkit and d
     ['de', 'Gemeinsames KI-Entwicklungstoolkit'],
   ]) {
     await page.goto(`/${locale}`);
+    await expect(page.getByRole('article')).toHaveCount(6);
+    await expect(page.locator('body')).not.toContainText('Ford Otosan');
     const toolkit = page.getByRole('article').filter({ has: page.getByRole('heading', { name: toolkitTitle, exact: true }) });
     await expect(toolkit).toContainText('Garanti BBVA Technology');
     await expect(toolkit).not.toContainText('Ford Otosan');

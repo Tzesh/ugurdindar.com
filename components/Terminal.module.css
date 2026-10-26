@@ -60,6 +60,7 @@
 .primaryAction:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--glow); }
 .highlights { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 24px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); gap: 24px; }
 .highlights > div + div { border-left: 1px solid var(--border); padding-left: 24px; }
+.highlights > div:nth-child(3n + 1) { border-left: 0; padding-left: 0; }
 .highlights strong { display: block; font: 550 2rem/1.2 var(--display); letter-spacing: -.055em; color: var(--accent); }
 .highlights > div > span { display: block; font-size: .75rem; margin-top: 8px; font-weight: 550; }
 .highlights p { color: var(--muted); font-size: .6875rem; line-height: 1.7; margin: 8px 0 0; }
@@ -286,7 +287,7 @@
   .heroActions { margin: 22px 0 26px; gap: 8px; }
   .heroActions > a { font-size: .75rem; padding: 9px 12px; }
   .highlights { grid-template-columns: 1fr; gap: 18px; }
-  .highlights > div { display: grid; grid-template-columns: 80px 1fr; gap: 0 16px; }
+  .highlights > div { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 0 16px; }
   .highlights > div + div { padding: 0; border-left: 0; }
   .highlights strong { grid-row: span 2; font-size: 1.25rem; padding-top: 3px; overflow-wrap: normal; }
   .highlights > div > span { margin-top: 0; }
@@ -348,7 +349,7 @@
   .composer form { flex-wrap: wrap; }
   .composer input { width: calc(100% - 28px); flex: 1; }
   .composer form button { width: 100%; }
-  .highlights > div { grid-template-columns: 70px 1fr; gap: 0 12px; }
+  .highlights > div { gap: 0 12px; }
   .highlights strong { font-size: 1.1rem; }
   .metrics { grid-template-columns: 1fr; }
 }
