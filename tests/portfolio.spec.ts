@@ -1,5 +1,33 @@
 import { expect, test } from '@playwright/test';
 
+test('professional updates appear in every locale with separate AI toolkit and digital worker experience', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  for (const [locale, toolkitTitle] of [
+    ['en', 'Shared AI development toolkit'],
+    ['tr', 'Ortak AI geliştirme araçları'],
+    ['de', 'Gemeinsames KI-Entwicklungstoolkit'],
+  ]) {
+    await page.goto(`/${locale}`);
+    const toolkit = page.getByRole('article').filter({ has: page.getByRole('heading', { name: toolkitTitle, exact: true }) });
+    await expect(toolkit).toContainText('Garanti BBVA Technology');
+    await expect(toolkit).not.toContainText('Ford Otosan');
+
+    await page.goto(`/${locale}?section=experience`);
+    const job = page.getByRole('article').filter({ has: page.getByRole('heading', { name: 'Garanti BBVA Technology', exact: true }) });
+    await job.locator('summary').click();
+    await expect(job.getByRole('listitem').filter({ hasText: 'MCP' })).toHaveCount(1);
+    await expect(job.getByRole('listitem').filter({ hasText: 'Claude' })).toHaveCount(1);
+    for (const detail of ['hCaptcha', 'JBoss', 'JDK', 'Division']) await expect(job).toContainText(new RegExp(detail, 'i'));
+
+    await page.goto(`/${locale}?section=skills`);
+    const skills = page.getByTestId('output');
+    await expect(skills.getByText('Java', { exact: true })).toBeVisible();
+    await expect(skills.getByText('Claude Digital Worker', { exact: true })).toBeVisible();
+    await expect(skills.getByText('Model Context Protocol (MCP)', { exact: true })).toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(320);
+  }
+});
+
 test('landing shows verified proof and PDF; projects and all locales fit 320px', async ({ page }) => {
   await page.goto('/en');
   await expect(page.getByText('30M+', { exact: true })).toBeVisible();

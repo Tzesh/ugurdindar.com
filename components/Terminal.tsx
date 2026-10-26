@@ -287,15 +287,15 @@ export default function Terminal({ locale, initialSection }: { locale: Locale; i
         </div>
 
         {entries.length === 0 && <div className={styles.homeDetails}>
-          <div className={styles.tags}>{['Spring Boot', '.NET', 'Apache Kafka', t.distributedSystems].map(tag => <span key={tag}>{tag}</span>)}</div>
+          <div className={styles.tags}>{['Java', 'Spring Boot', 'Apache Kafka', t.distributedSystems, 'AI Agents / MCP'].map(tag => <span key={tag}>{tag}</span>)}</div>
           <div className={styles.heroActions}>
             <a className={styles.primaryAction} href={`/${locale}?section=experience`} onClick={event => navigate(event, 'experience')}>{t.viewExperience}<span aria-hidden="true"> ↗</span></a>
             <a href={profile.resumePdf} download>{bio.pdfLabel}<span aria-hidden="true"> ↓</span></a>
           </div>
           <div className={styles.highlights}>{work.highlights.map(item => <div key={item.label}><strong>{item.value}</strong><span>{item.label}</span><p>{item.detail}</p></div>)}</div>
-          <div className={styles.sectionHeader}><div><span className={styles.kicker}>{t.sourceNote}</span><h2>{t.selectedWork}</h2></div><span aria-hidden="true">[ 01 — 02 ]</span></div>
+          <div className={styles.sectionHeader}><div><span className={styles.kicker}>{t.sourceNote}</span><h2>{t.selectedWork}</h2></div><span aria-hidden="true">[ 01 — {String(work.cases.length).padStart(2, '0')} ]</span></div>
           <div className={styles.featuredWork}>{work.cases.map((item, index) => <article key={item.title}>
-            <div className={styles.caseMeta}><span>0{index + 1}</span><span>{index === 0 ? 'Garanti BBVA Technology' : 'Ford Otosan'}</span></div>
+            <div className={styles.caseMeta}><span>0{index + 1}</span><span>{item.company}</span></div>
             <h3>{item.title}</h3><p>{item.description}</p>
             <div className={styles.tags}>{item.tags.map(tag => <span key={tag}>{tag}</span>)}</div>
             <a href={`/${locale}?section=experience`} onClick={event => navigate(event, 'experience')}>{t.labels.experience}<span aria-hidden="true"> ↗</span></a>

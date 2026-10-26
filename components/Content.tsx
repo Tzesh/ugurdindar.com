@@ -84,7 +84,7 @@ export default function Content({ section, locale, inResume = false }: { section
         {Object.entries(skills).map(([label, value], index) => <div key={label} className={styles.skillGroup}><span className={styles.skillSymbol} aria-hidden="true">{index ? '{ }' : '</>'}</span><h3>{label}</h3><div className={styles.tags}>{value.split(', ').map(skill => <span key={skill}>{skill}</span>)}</div></div>)}
         <div className={styles.skillGroup}><span className={styles.skillSymbol} aria-hidden="true">⌘</span><h3>{bio.toolsLabel}</h3><div className={styles.tags}>{tools.split(', ').map(tool => <span key={tool}>{tool}</span>)}</div></div>
       </div>
-      <div className={styles.skillNotes}><div><h3>{bio.interpersonalLabel}</h3><p>{bio.interpersonal}</p></div><div><h3>{bio.languagesLabel}</h3><p>{bio.languages}</p><h3>{bio.otherLabel}</h3><p>{bio.other}</p></div></div>
+      <div className={styles.skillNotes}><div><h3>{bio.languagesLabel}</h3><p>{bio.languages}</p></div></div>
       <CredentialList locale={locale} />
     </> : section === 'projects' ? <>
       <p className={styles.sectionIntro}>{bio.projectsIntro}</p>
